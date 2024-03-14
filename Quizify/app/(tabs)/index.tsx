@@ -1,3 +1,7 @@
+import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import Spinner from 'react-native-loading-spinner-overlay'
+
 import 'react-native-url-polyfill/auto'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
@@ -5,10 +9,8 @@ import Auth from '../../components/Auth'
 import Account from '../../components/Account'
 import { Session } from '@supabase/supabase-js'
 
-import { StyleSheet } from 'react-native';
-
 import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+
 
 export default function TabOneScreen() {
   const [session, setSession] = useState<Session | null>(null)
@@ -25,9 +27,10 @@ export default function TabOneScreen() {
   
   return (
     <View style={styles.container}>
+      <Text>Quizify</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
       {session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
+     
     </View>
   );
 }

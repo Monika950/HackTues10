@@ -10,8 +10,18 @@ const QuizComponent = () => {
     const [isRight, setIsRight] = useState(false);
     const navigation = useNavigation();
 
+    const resertQuiz = () => {
+        setScore(0);
+        setQuestionIndex(0);
+    }
+
+    const handlePress = () => {
+        resertQuiz();
+        navigation.navigate('index');
+    }
+
     const checkAnswer = (index: number) => {
-        if (globalVariable.GPTOutput.questions[questionIndex].answers[index].is_correct) {
+        if (GPTOutput().questions[questionIndex].answers[index].is_correct) {
             setScore(score + 1);
             setIsRight(true);
             console.warn('Correct');
@@ -22,22 +32,23 @@ const QuizComponent = () => {
         setQuestionIndex(questionIndex + 1);
     }
 
-    const renderQuiz = () => {
-        try {
+    const GPTOutput = () => {
+        if(typeof globalVariable.GPTOutput === 'string')
             globalVariable.GPTOutput = JSON.parse(globalVariable.GPTOutput);
-        } catch (e) {
-            console.log(e);
-        }
+        return globalVariable.GPTOutput;
+    };
+
+    const renderQuiz = () => {
         // Check if globalVariable.GPTOutput is defined
-        if (globalVariable.GPTOutput && globalVariable.GPTOutput.questions) {
-            if (questionIndex < globalVariable.GPTOutput.questions.length) {
+        if (GPTOutput() && GPTOutput().questions) {
+            if (questionIndex < GPTOutput().questions.length) {
                 return (
                     <View>
-                        <Text>{globalVariable.GPTOutput.questions[questionIndex].question}</Text>
-                        <Button text={globalVariable.GPTOutput.questions[questionIndex].answers[0].answer} onPress={() => checkAnswer(0)} />
-                        <Button text={globalVariable.GPTOutput.questions[questionIndex].answers[1].answer} onPress={() => checkAnswer(1)} />
-                        <Button text={globalVariable.GPTOutput.questions[questionIndex].answers[2].answer} onPress={() => checkAnswer(2)} />
-                        <Button text={globalVariable.GPTOutput.questions[questionIndex].answers[3].answer} onPress={() => checkAnswer(3)} />
+                        <Text>{GPTOutput().questions[questionIndex].question}</Text>
+                        <Button text={GPTOutput().questions[questionIndex].answers[0].answer} onPress={() => checkAnswer(0)} />
+                        <Button text={GPTOutput().questions[questionIndex].answers[1].answer} onPress={() => checkAnswer(1)} />
+                        <Button text={GPTOutput().questions[questionIndex].answers[2].answer} onPress={() => checkAnswer(2)} />
+                        <Button text={GPTOutput().questions[questionIndex].answers[3].answer} onPress={() => checkAnswer(3)} />
                     </View>
                 );
             } else {
@@ -45,9 +56,7 @@ const QuizComponent = () => {
                     <View>
                         <Text>Quiz Over</Text>
                         <Text>Your Score: {score}</Text>
-                        <Pressable onPress={() => {}} >
-                            <Text>Go Back</Text>
-                        </Pressable>
+                        <Button onPress={handlePress} text='Go Back'/>
                     </View>
                 );
             }

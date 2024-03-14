@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
 import {globalVariable} from '../globals';
 import { useNavigation } from '@react-navigation/native';
 
 const ChatGPT = () => {
-  //const [data, setData] = useState([]);
     const apiKey = '###';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
@@ -22,7 +21,7 @@ const ChatGPT = () => {
           "messages": [
             {
               "role": "system",
-              "content": "You are a geography teacher and want to examine your students. You will be given text and want to generate questions and 4 answers for each based on it. You should put them in JSON format with a variable that tells whether the answer is correct."
+              "content": "You are a geography teacher and want to examine your students. You will be given text and want to generate questions and 4 answers for each based on it. You should put them in JSON format with a variable that tells whether the answer is correct.(always call it 'is_correct')"
             },
             {
               "role": "user",
@@ -48,10 +47,7 @@ const ChatGPT = () => {
       console.log('bb');
 
       navigation.navigate('three');
-
-      //setData([...data, { type: 'bot', response: formattedResponse }]);
   };
-  
 
   return (
     <View style={styles.container}>
@@ -72,15 +68,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-  },
-  messageContainer: {
-    marginBottom: 10,
-  },
-  botMessage: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    borderRadius: 10,
-    maxWidth: '80%',
   },
 });
 

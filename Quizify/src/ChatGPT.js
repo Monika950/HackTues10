@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
-import {globalVariable} from '../globals';
 
 const ChatGPT = () => {
-  //const [data, setData] = useState([]);
-    const apiKey = '###';
-    const apiUrl = 'https://api.openai.com/v1/chat/completions';
+  const [data, setData] = useState([]);
+  const apiKey = '###';
+  const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
     const handleSend = async () => {
       console.log('aa');
@@ -34,13 +33,17 @@ const ChatGPT = () => {
               'Content-Type': 'application/json',
           }
       }).then(response => {
-          questions = response;
-          globalVariable.GPTOutput = response.data.choices[0].message.content;
-          console.log(globalVariable.GPTOutput);
+        questions = response
       })
       .catch(error => {
-          console.log(error);
+        console.log(error);
       });
+
+      try {
+        console.log(questions.data.choices[0].message.content);
+      } catch (error) {
+        console.log(error);
+      }
 
       console.log('bb');
       //setData([...data, { type: 'bot', response: formattedResponse }]);
@@ -50,7 +53,7 @@ const ChatGPT = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ChatGPT</Text>
-      {/* <FlatList
+      <FlatList
         data={data.filter(item => item.type === 'bot')}
         renderItem={({ item }) => (
           <View style={styles.messageContainer}>
@@ -58,7 +61,7 @@ const ChatGPT = () => {
           </View>
         )}
         keyExtractor={(item, index) => index.toString()}
-      /> */}
+      />
 
       <Button text="Send" onPress={handleSend} />
 

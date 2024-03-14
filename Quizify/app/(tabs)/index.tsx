@@ -1,53 +1,106 @@
-import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
-import Spinner from 'react-native-loading-spinner-overlay'
-
 import 'react-native-url-polyfill/auto'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import Auth from '../../components/Auth'
+
 import Account from '../../components/Account'
 import { Session } from '@supabase/supabase-js'
 
 import EditScreenInfo from '@/components/EditScreenInfo';
+import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 
-export default function TabOneScreen() {
-  const [session, setSession] = useState<Session | null>(null)
+const Login = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
+  // Sign in with email and password
+  const onSignInPress = async () => {
+    setLoading(true)
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     })
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
+    if (error) Alert.alert(error.message)
+    setLoading(false)
+  }
+
+  // Create a new user
+  const onSignUpPress = async () => {
+    setLoading(true)
+    const { error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
     })
-  }, [])
-  
+
+    if (error) Alert.alert(error.message)
+    setLoading(false)
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Quizify</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      {session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
-     
+      <Spinner visible={loading} />
+
+      <Text style={styles.header}>My Cloud</Text>
+
+      <TextInput
+        autoCapitalize="none"
+        placeholder="john@doe.com"
+        value={email}
+        onChangeText={setEmail}
+        style={styles.inputField}
+      />
+      <TextInput
+        placeholder="password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.inputField}
+      />
+
+      <TouchableOpacity onPress={onSignInPress} style={styles.button}>
+        <Text style={{ color: '#fff' }}>Sign in</Text>
+      </TouchableOpacity>
+      <Button onPress={onSignUpPress} title="Create Account" color={'#fff'}></Button>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 200,
+    padding: 20,
+    backgroundColor: '#151515',
   },
-  title: {
+  header: {
     fontSize: 30,
-    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 50,
+    color: '#fff',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '90%',
+  inputField: {
+    marginVertical: 4,
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#2b825b',
+    borderRadius: 4,
+    padding: 10,
+    color: '#fff',
+    backgroundColor: '#363636',
   },
-});
+  button: {
+    marginVertical: 15,
+    alignItems: 'center',
+    backgroundColor: '#2b825b',
+    padding: 12,
+    borderRadius: 4,
+  },
+})
+
+export default Login
+

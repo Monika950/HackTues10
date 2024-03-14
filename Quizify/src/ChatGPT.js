@@ -3,11 +3,14 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
 import {globalVariable} from '../globals';
+import { useNavigation } from '@react-navigation/native';
 
 const ChatGPT = () => {
   //const [data, setData] = useState([]);
     const apiKey = '###';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
+
+    const navigation = useNavigation();
 
     const handleSend = async () => {
       console.log('aa');
@@ -43,6 +46,9 @@ const ChatGPT = () => {
       });
 
       console.log('bb');
+
+      navigation.navigate('three');
+
       //setData([...data, { type: 'bot', response: formattedResponse }]);
   };
   
@@ -50,18 +56,7 @@ const ChatGPT = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ChatGPT</Text>
-      {/* <FlatList
-        data={data.filter(item => item.type === 'bot')}
-        renderItem={({ item }) => (
-          <View style={styles.messageContainer}>
-            <Text style={styles.botMessage}>{item.text}</Text>
-          </View>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      /> */}
-
       <Button text="Send" onPress={handleSend} />
-
     </View>
   );
 };

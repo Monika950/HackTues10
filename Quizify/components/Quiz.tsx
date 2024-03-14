@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { globalVariable } from '@/globals';
 import Button from './Button';

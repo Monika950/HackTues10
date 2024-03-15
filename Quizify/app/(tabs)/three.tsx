@@ -1,15 +1,13 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import {View, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
 import QuizComponent from '@/components/Quiz';
-import React from 'react';
 
-
-export default function TabTwoScreen() {
+export default function TabThreeScreen() {
+    //console.log(globalVariable.GPTOutput);
+    console.log('123');
   return (
     <View style={styles.container}>
-      <Text>Tab Two</Text>
+      <QuizComponent />
     </View>
   );
 }

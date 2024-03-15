@@ -1,9 +1,5 @@
 import { StyleSheet } from 'react-native';
-
 import { Text, View } from '@/components/Themed';
-
-import ChatGPT from '../../src/chat'
-
 import ImageToText from '@/components/ImageToText';
 
 export default function TabOneScreen() {
@@ -18,7 +14,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
 });

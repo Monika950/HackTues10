@@ -1,46 +1,129 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { globalVariable } from '@/globals';
+import { useNavigation } from 'expo-router';
 import Button from './Button';
 
 const QuizComponent = () => {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
-    const [isRight, setIsRight] = useState(false);
+    const [color, setColor] = useState(false);
+    const [pressedIndex, setPressedIndex] = useState(-1); // to highlight the correct answer after pressing
+    const [answerLocked, setAnswerLocked] = useState(false); // to prevent answering while animation is ongoing
+    const navigation = useNavigation();
+    var allPressed1: number[] = [];
+    var [allPressed, setAllPressed] = useState(allPressed1);
+
+    const resetQuiz = () => {
+        setScore(0);
+        setQuestionIndex(0);
+    }
+
+    const handlePress = () => {
+        resetQuiz();
+        navigation.navigate('index');
+    }
 
     const checkAnswer = (index: number) => {
-        if (globalVariable.GPTOutput.questions[questionIndex].answers[index].isCorrect) {
+        if (answerLocked) return; // Prevent answering while animation is ongoing
+        setPressedIndex(index);
+        console.log(index);
+        allPressed.push(index);
+        console.log(allPressed);
+        setColor(true);
+
+        const isCorrect = GPTOutput().questions[questionIndex].answers[index].is_correct;
+        if (isCorrect) {
             setScore(score + 1);
-            setIsRight(true);
-            console.warn('Correct');
+            setTimeout(() => {
+                setQuestionIndex(questionIndex + 1);
+            }, 1000); // Delay before moving to the next question
         } else {
-            setIsRight(false);
-            console.warn('Incorrect');
+            setTimeout(() => {
+                setQuestionIndex(questionIndex + 1);
+            }, 1000); // Delay before moving to the next question
         }
-        setQuestionIndex(questionIndex + 1);
+        setAnswerLocked(true); // Lock answering during animation
+        setTimeout(() => {
+            setColor(false);
+            setAnswerLocked(false);
+            setPressedIndex(-1);
+            allPressed = [];
+        }, 1000);
     }
 
+    const GPTOutput = () => {
+        if (typeof globalVariable.GPTOutput === 'string')
+            globalVariable.GPTOutput = JSON.parse(globalVariable.GPTOutput);
+        return globalVariable.GPTOutput;
+    };
+
     const renderQuiz = () => {
-        if (questionIndex < globalVariable.GPTOutput.questions.length) {
-            var answers = globalVariable.GPTOutput.questions[questionIndex].answers;
-            return (
-                <View>
-                    <Text>{globalVariable.GPTOutput.questions[questionIndex].question}</Text>
-                    <Button text={globalVariable.GPTOutput.questions[questionIndex].answers[0].answer} onPress={() => checkAnswer(0)} />
-                    <Button text={globalVariable.GPTOutput.questions[questionIndex].answers[1].answer} onPress={() => checkAnswer(1)} />
-                    <Button text={globalVariable.GPTOutput.questions[questionIndex].answers[2].answer} onPress={() => checkAnswer(2)} />
-                    <Button text={globalVariable.GPTOutput.questions[questionIndex].answers[3].answer} onPress={() => checkAnswer(3)} />
-                </View>
-            );
+        // Check if globalVariable.GPTOutput is defined
+        if (GPTOutput() && GPTOutput().questions) {
+            if (questionIndex < GPTOutput().questions.length) {
+                return (
+                    <View>
+                        <Text style={styles.question}>{GPTOutput().questions[questionIndex].question}</Text>
+                        <Pressable
+                            onPress={() => checkAnswer(0)}
+                            style={[
+                                styles.button,
+                                color && GPTOutput().questions[questionIndex].answers[0].is_correct && styles.correctAnswer,
+                                color && !GPTOutput().questions[questionIndex].answers[0].is_correct && pressedIndex === 1 && styles.wrongAnswer,
+                            ]}
+                        >
+                            <Text style={styles.title}>{GPTOutput().questions[questionIndex].answers[0].answer}</Text>
+                        </Pressable>
+                        <Pressable
+                            onPress={() => checkAnswer(1)}
+                            style={[
+                                styles.button,
+                                color && GPTOutput().questions[questionIndex].answers[1].is_correct && styles.correctAnswer,
+                                color && !GPTOutput().questions[questionIndex].answers[1].is_correct && pressedIndex === 1 && styles.wrongAnswer,
+                            ]}
+                        >
+                            <Text style={styles.title}>{GPTOutput().questions[questionIndex].answers[1].answer}</Text>
+                        </Pressable>
+                        <Pressable
+                            onPress={() => checkAnswer(2)}
+                            style={[
+                                styles.button,
+                                color && GPTOutput().questions[questionIndex].answers[2].is_correct && styles.correctAnswer,
+                                color && !GPTOutput().questions[questionIndex].answers[2].is_correct && pressedIndex === 2 && styles.wrongAnswer,
+                            ]}
+                        >
+                            <Text style={styles.title} >{GPTOutput().questions[questionIndex].answers[2].answer}</Text>
+                        </Pressable>
+                        <Pressable
+                            onPress={() => checkAnswer(3)}
+                            style={[
+                                styles.button,
+                                color && GPTOutput().questions[questionIndex].answers[3].is_correct && styles.correctAnswer,
+                                color && !GPTOutput().questions[questionIndex].answers[3].is_correct && pressedIndex === 3 && styles.wrongAnswer,
+                            ]}
+                        >
+                            <Text style={styles.title}>{GPTOutput().questions[questionIndex].answers[3].answer}</Text>
+                        </Pressable>
+                    </View>
+                );
+            } else {
+                return (
+                    <View>
+                        <Text>Quiz Over</Text>
+                        <Text>Your Score: {score}</Text>
+                        <Button onPress={handlePress} text='Go Back' />
+                    </View>
+                );
+            }
         } else {
             return (
                 <View>
-                    <Text>Quiz Over</Text>
-                    <Text>Your Score: {score}</Text>
+                    <Text>Loading...</Text>
                 </View>
             );
         }
-    }
+    };
 
     return (
         <View>
@@ -49,4 +132,33 @@ const QuizComponent = () => {
     );
 };
 
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: 'lightblue',
+        padding: 15,
+        alignItems: 'center',
+        borderRadius: 100,
+        marginVertical: 10,
+    },
+    correctAnswer: {
+        backgroundColor: 'green',
+    },
+    wrongAnswer: {
+        backgroundColor: 'red',
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: 'white',
+    },
+    question: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'black',
+        textAlign: 'center',
+        marginVertical: 10,
+    }
+});
+
 export default QuizComponent;
+

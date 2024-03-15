@@ -54,16 +54,32 @@ function RootLayoutNav() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
-      <Image style={styles.image} source={require('../assets/images/curve.png')} />
+      <Image style={styles.curve} source={require('../assets/images/curve.png')} />
+      <Image style={styles.up1} source={require('../assets/images/up1.png')} />
+      <Image style={styles.down1} source={require('../assets/images/down1.png')} />
     </ThemeProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
+  curve: {
     width: '100%',
     height: "100%",
     position: 'absolute',
     opacity: 0.7,
+  },
+  up1: {
+    width: 170,
+    height: 170,
+    position: 'absolute',
+    opacity: 1,
+  },
+  down1: {
+    width: 130,
+    height: 130,
+    bottom: 0,
+    right: -270,
+    position: 'relative',
+    opacity: 1,
   }
 });

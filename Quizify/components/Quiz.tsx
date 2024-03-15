@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { globalVariable } from '@/globals';
 import { useNavigation } from 'expo-router';
@@ -60,7 +60,7 @@ const QuizComponent = () => {
 
     const renderQuiz = () => {
         // Check if globalVariable.GPTOutput is defined
-        if (GPTOutput() && GPTOutput().questions) {
+        if (GPTOutput() && GPTOutput().questions && GPTOutput().questions.length > 1){
             if (questionIndex < GPTOutput().questions.length) {
                 return (
                     <View>

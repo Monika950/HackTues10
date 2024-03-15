@@ -3,12 +3,11 @@ import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
 import {globalVariable} from '../globals';
-import { useNavigation } from '@react-navigation/native';
+import {Link} from 'expo-router';
 
 const ChatGPT = ({textFromImage}) => {
     const apiKey = '###';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
-    const navigation = useNavigation();
 
     const handleSend = async () => {
       console.log('aa');
@@ -17,27 +16,28 @@ const ChatGPT = ({textFromImage}) => {
       console.log(textFromImage, typeof textFromImage);
 
       const response = await axios.post(apiUrl, {
-          model: 'gpt-3.5-turbo',
-          response_format: { "type": "json_object" },
-          "messages": [
-            {
-              "role": "system",
-              "content": "You are a high school teacher and want to examine your students. You will be given text and want to generate 2 questions and 4 answers for each based on it. You should put them in JSON format with a variable that tells whether the answer is correct.(always call it 'is_correct')"
-            },
-            {
-              "role": "user",
-              "content": textFromImage,
-            }
-          ],
-          max_tokens: 300,
-          stop: ["."]
-      }, {
+          
+            model: "gpt-3.5-turbo",
+            messages: [
+              {
+                role: "system",
+                content: "You are a helpful assistant."
+              },
+              {
+                role: "user",
+                content: "Generate two questions with 4 answers based on this text. The format should be JSON and it should have a is_correct value for each answer." + textFromImage
+              }
+            ],
+            max_tokens: 300,
+          },
+          //stop: ["."]
+       {
           headers: {
               'Authorization': `Bearer ${apiKey}`,
               'Content-Type': 'application/json',
           }
       }).then(response => {
-          console.log(response);
+        console.log(response);
           questions = response;
           globalVariable.GPTOutput = response.data.choices[0].message.content;
           console.log(globalVariable.GPTOutput);
@@ -47,12 +47,12 @@ const ChatGPT = ({textFromImage}) => {
       });
 
       console.log('bb');
-      
-      navigation.navigate('three');
   };
 
   return (
+    <Link href={'/quizScreen'} asChild>
       <Button text="Send" onPress={handleSend} />
+    </Link>
   );
 };
 

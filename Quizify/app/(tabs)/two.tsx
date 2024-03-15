@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { Text, View } from '@/components/Themed';
+import QuizComponent from '@/components/Quiz';
 import React from 'react';
+
 
 export default function TabTwoScreen() {
   return (

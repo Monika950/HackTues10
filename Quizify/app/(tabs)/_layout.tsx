@@ -3,6 +3,9 @@ import {useAuth} from '../../components/Auth'
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Link, Tabs } from 'expo-router';
+import { Pressable, View} from 'react-native';
 
 // Simple stack layout within the authenticated area
 const StackLayout = () => {
@@ -85,5 +88,6 @@ export default StackLayout
           }}
         />
     </Tabs>
+
   );
 } */}

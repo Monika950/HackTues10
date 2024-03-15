@@ -15,6 +15,7 @@ const StackLayout = () => {
           backgroundColor: '#0f0f0f',
         },
         headerTintColor: '#fff',
+        headerShown: false
       }}
     >
       <Stack.Screen

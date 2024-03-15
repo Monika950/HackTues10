@@ -6,9 +6,10 @@ import Account from '../../components/Account'
 import { Session } from '@supabase/supabase-js'
 
 //import EditScreenInfo from '@/components/EditScreenInfo';
-import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import Spinner from 'react-native-loading-spinner-overlay'
+
 
 
 const Login = () => {
@@ -44,8 +45,10 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Spinner visible={loading} />
-
-      <Text style={styles.header}>My Cloud</Text>
+      <Image style={styles.curve} source={require('../../assets/images/curve.png')} />
+      <Image style={styles.down1} source={require('../../assets/images/down1.png')} />
+      <Image style={styles.up1} source={require('../../assets/images/up1.png')} />
+      <Text style={styles.header}>Login</Text>
 
       <TextInput
         autoCapitalize="none"
@@ -71,10 +74,33 @@ const Login = () => {
 }
 
 const styles = StyleSheet.create({
+  curve: {
+    width: "100%",
+    height: "100%",
+    position: 'absolute',
+    opacity: 1,
+    resizeMode:"cover"
+  },
+  up1: {
+    width: 170,
+    height: 170,
+    position: 'absolute',
+    opacity: 1,
+    resizeMode:"contain"
+  },
+  down1: {
+    width: 130,
+    height: 130,
+    bottom: 0,
+    right: 0,
+    position: 'absolute',
+    opacity: 1,
+    resizeMode:"contain"
+  },
   container: {
     flex: 1,
     paddingTop: 200,
-    padding: 20,
+    //padding: 20,
     backgroundColor: '#151515',
   },
   header: {
@@ -101,6 +127,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 })
+
+
 
 export default Login
 

@@ -10,13 +10,13 @@ const StackLayout = () => {
 
   return (
     <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#0f0f0f',
-        },
-        headerTintColor: '#fff',
-        headerShown: false,
-      }}
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: '#0f0f0f',
+      },
+      headerTintColor: '#fff',
+      headerShown: false,
+    }}
     >
       <Stack.Screen
         name="list"

@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 const ChatGPT = ({textFromImage}) => {
     const apiKey = '###';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
-
     const navigation = useNavigation();
 
     const handleSend = async () => {
@@ -53,19 +52,11 @@ const ChatGPT = ({textFromImage}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>ChatGPT</Text>
       <Button text="Send" onPress={handleSend} />
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',

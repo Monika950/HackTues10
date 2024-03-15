@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { globalVariable } from '@/globals';
 import { useNavigation } from 'expo-router';
 import Button from './Button';
+import { all } from 'axios';
 
 const QuizComponent = () => {
     const [questionIndex, setQuestionIndex] = useState(0);
@@ -11,6 +12,8 @@ const QuizComponent = () => {
     const [pressedIndex, setPressedIndex] = useState(-1); // to highlight the correct answer after pressing
     const [answerLocked, setAnswerLocked] = useState(false); // to prevent answering while animation is ongoing
     const navigation = useNavigation();
+    var allPressed1: number[] = [];
+    var [allPressed, setAllPressed] = useState(allPressed1);
 
     const resetQuiz = () => {
         setScore(0);
@@ -25,6 +28,9 @@ const QuizComponent = () => {
     const checkAnswer = (index: number) => {
         if (answerLocked) return; // Prevent answering while animation is ongoing
         setPressedIndex(index);
+        console.log(index);
+        allPressed.push(index);
+        console.log(allPressed);
         setColor(true);
 
         const isCorrect = GPTOutput().questions[questionIndex].answers[index].is_correct;
@@ -42,7 +48,8 @@ const QuizComponent = () => {
         setTimeout(() => {
             setColor(false);
             setAnswerLocked(false);
-             // Unlock answering after animation
+            setPressedIndex(-1);
+            allPressed = [];
         }, 1000);
     }
 
@@ -117,9 +124,7 @@ const QuizComponent = () => {
                 </View>
             );
         }
-    }
-
-    globalVariable.ShowTabs = true;
+    };
 
     return (
         <View>
@@ -142,7 +147,7 @@ const styles = StyleSheet.create({
     wrongAnswer: {
         backgroundColor: 'red',
     },
-    text: {
+    title: {
         fontSize: 16,
         fontWeight: '600',
         color: 'white',

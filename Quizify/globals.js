@@ -12,20 +12,4 @@ export const globalVariable = {
           },
         ]
       },
-
-    Default: {
-        "questions": [
-          {
-            "question": " ",
-            "answers": [
-              {"answer": " ", "is_correct": false},
-              {"answer": " ", "is_correct": false},
-              {"answer": " ", "is_correct": false},
-              {"answer": " ", "is_correct": false}
-            ]
-          },
-        ]
-      },
-
-    ShowTabs: true,
 };

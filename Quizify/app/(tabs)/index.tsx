@@ -5,7 +5,7 @@ import { supabase } from '../../lib/supabase'
 import Account from '../../components/Account'
 import { Session } from '@supabase/supabase-js'
 
-import EditScreenInfo from '@/components/EditScreenInfo';
+//import EditScreenInfo from '@/components/EditScreenInfo';
 import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Spinner from 'react-native-loading-spinner-overlay'
@@ -57,7 +57,7 @@ const Login = () => {
       <TextInput
         placeholder="password"
         value={password}
-        onChangeText={setPassword}
+        onChangeText={setPassword} 
         secureTextEntry
         style={styles.inputField}
       />

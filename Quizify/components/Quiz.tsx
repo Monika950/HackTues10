@@ -22,7 +22,7 @@ const QuizComponent = () => {
 
     const handlePress = () => {
         resetQuiz();
-        navigation.navigate('index');
+        navigation.navigate('main');//tuk eventualno da hodi drugade
     }
 
     const checkAnswer = (index: number) => {
@@ -49,6 +49,7 @@ const QuizComponent = () => {
             setColor(false);
             setAnswerLocked(false);
             setPressedIndex(-1);
+            // save allPressed!!!
             allPressed = [];
         }, 1000);
     }

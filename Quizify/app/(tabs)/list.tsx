@@ -10,6 +10,7 @@ import { FileObject } from '@supabase/storage-js'
 
 import ImageItem from '../../components/ImageItem'
 
+
 const list = () => {
   const { user } = useAuth();
   const [files, setFiles] = useState<FileObject[]>([]);

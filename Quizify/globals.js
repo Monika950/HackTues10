@@ -1,4 +1,4 @@
-export const globalVariable = {
+export const globalVariable = {//globalVariable.GPTOutput
     GPTOutput:  {
         "questions": [
           {

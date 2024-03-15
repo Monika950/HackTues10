@@ -1,15 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, Image, SafeAreaView, FlatList, } from "react-native";
+import { StyleSheet, Text, Image, SafeAreaView, FlatList,Pressable } from "react-native";
 import { StatusBar } from "expo-status-bar"; 
 import { useState } from "react"; 
 import * as ImagePicker from "expo-image-picker";  
 import ChatGPT from '@/src/ChatGPT';
 import Button from '../components/Button';
+import { Slot, useRouter, useSegments,Link } from 'expo-router';
 
 
 const imageToTextAPI = process.env.IMAGE_TO_TEXT_API
 
 export default function GetText() { 
+	const router = useRouter()
 	const [image, setImage] = useState(null); 
 	
 	const [extractedText, setExtractedText] = useState("");
@@ -85,8 +87,18 @@ export default function GetText() {
 			.catch((error) => console.log("error", error)); 		
 	}; 
 
+	// const NavStorage = () => {
+	// 	router.replace('../app/(tabs)/list')
+	//   }
+
 	return ( 
 		<SafeAreaView style={styles.container}> 
+			<Link href="../app/(tabs)/list" >
+            <Pressable>
+              <Text>Storage</Text>
+            </Pressable>
+           {/* // <Button onPress={NavStorage } title="Storage" ></Button> */}
+          </Link>
 			<Text style={styles.heading2}> 
 				Image to Text App 
 			</Text> 

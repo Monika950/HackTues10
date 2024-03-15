@@ -2,15 +2,11 @@ import 'react-native-url-polyfill/auto'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 
-import Account from '../../components/Account'
-import { Session } from '@supabase/supabase-js'
-
 //import EditScreenInfo from '@/components/EditScreenInfo';
 import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import Spinner from 'react-native-loading-spinner-overlay'
-import ChatGPT from '../../src/ChatGPT';
-import GetText from '../../components/ImageToText'
+
 
 
 const Login = () => {

@@ -1,6 +1,7 @@
 import { Slot, useRouter, useSegments } from 'expo-router'
 import { useEffect } from 'react'
 import {AuthProvider, useAuth} from '../components/Auth'
+//import { InitialLayout } from './Initial'
 
 // Makes sure the user is authenticated before accessing protected pages
 const InitialLayout = () => {
@@ -16,7 +17,7 @@ const InitialLayout = () => {
 
     if (session && !inAuthGroup) {
       // Redirect authenticated users to the list page
-      router.replace('./list')
+      router.replace('./(tabs)/main')
     } else if (!session) {
       // Redirect unauthenticated users to the login page
       router.replace('/')

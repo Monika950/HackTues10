@@ -25,7 +25,7 @@ const ChatGPT = ({textFromImage}) => {
               },
               {
                 role: "user",
-                content: "Generate two questions with 4 answers based on this text. The format should be JSON and it should have a is_correct value for each answer." + textFromImage
+                content: "Generate two questions with 4 answers based on this text. The format should be JSON and it should have a is_correct value for each answer (the answer var should be calle 'answer')." + textFromImage
               }
             ],
             max_tokens: 300,
@@ -50,9 +50,12 @@ const ChatGPT = ({textFromImage}) => {
   };
 
   return (
-    <Link href={'/quizScreen'} asChild>
+    <View>
       <Button text="Send" onPress={handleSend} />
-    </Link>
+      <Link href={'/quizScreen'} asChild>
+        <Text>Start Quiz</Text>
+      </Link>
+    </View>
   );
 };
 
@@ -66,4 +69,3 @@ const styles = StyleSheet.create({
 });
 
 export default ChatGPT;
-

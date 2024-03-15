@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import {globalVariable} from '../globals';
 import { useNavigation } from '@react-navigation/native';
 
-const ChatGPT = () => {
+const ChatGPT = ({textFromImage}) => {
     const apiKey = '###';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
@@ -15,17 +15,19 @@ const ChatGPT = () => {
       console.log('aa');
       var questions;
 
+      console.log(textFromImage, typeof textFromImage);
+
       const response = await axios.post(apiUrl, {
           model: 'gpt-3.5-turbo',
           response_format: { "type": "json_object" },
           "messages": [
             {
               "role": "system",
-              "content": "You are a geography teacher and want to examine your students. You will be given text and want to generate questions and 4 answers for each based on it. You should put them in JSON format with a variable that tells whether the answer is correct.(always call it 'is_correct')"
+              "content": "You are a high school teacher and want to examine your students. You will be given text and want to generate 2 questions and 4 answers for each based on it. You should put them in JSON format with a variable that tells whether the answer is correct.(always call it 'is_correct')"
             },
             {
               "role": "user",
-              "content": "Capital of France is Paris. Capital of Spain is Madrid."
+              "content": textFromImage,
             }
           ],
           max_tokens: 300,
@@ -36,6 +38,7 @@ const ChatGPT = () => {
               'Content-Type': 'application/json',
           }
       }).then(response => {
+          console.log(response);
           questions = response;
           globalVariable.GPTOutput = response.data.choices[0].message.content;
           console.log(globalVariable.GPTOutput);
@@ -45,7 +48,7 @@ const ChatGPT = () => {
       });
 
       console.log('bb');
-
+      
       navigation.navigate('three');
   };
 

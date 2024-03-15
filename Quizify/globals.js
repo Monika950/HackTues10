@@ -25,5 +25,7 @@ export const globalVariable = {
             ]
           },
         ]
-      }
+      },
+
+    ShowTabs: true,
 };

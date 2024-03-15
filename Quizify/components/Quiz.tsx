@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { globalVariable } from '@/globals';
-import { useNavigation } from 'expo-router';
+import { useNavigation,Link } from 'expo-router';
 import Button from './Button';
+
 
 const QuizComponent = () => {
     const [questionIndex, setQuestionIndex] = useState(0);
@@ -21,7 +22,8 @@ const QuizComponent = () => {
 
     const handlePress = () => {
         resetQuiz();
-        navigation.navigate('main');//tuk eventualno da hodi drugade
+        //navigation.navigate('main');
+        //tuk eventualno da hodi drugade
     }
 
     const checkAnswer = (index: number) => {
@@ -113,7 +115,8 @@ const QuizComponent = () => {
                     <View>
                         <Text>Quiz Over</Text>
                         <Text>Your Score: {score}</Text>
-                        <Button onPress={handlePress} text='Go Back' />
+                        <Link href={"/(tabs)/main2"} asChild>
+                        <Button onPress={handlePress} text='Go Back' /></Link>
                     </View>
                 );
             }

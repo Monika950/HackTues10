@@ -50,7 +50,7 @@ import { Ionicons } from '@expo/vector-icons'
         }}>
     
 
-        <Stack.Screen name="main"/>
+        <Stack.Screen name="main2"/>
     <Stack.Screen
       name="two"
       options={{

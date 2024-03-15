@@ -7,6 +7,8 @@ import ChatGPT from '@/src/ChatGPT';
 import Button from '../components/Button';
 
 
+const imageToTextAPI = process.env.IMAGE_TO_TEXT_API
+
 export default function GetText() { 
 	const [image, setImage] = useState(null); 
 	
@@ -51,7 +53,7 @@ export default function GetText() {
 		let myHeaders = new Headers(); 
 		myHeaders.append( 
 			"apikey", 
-			"###"
+			imageToTextAPI,
 		); 
 		myHeaders.append( 
 			"Content-Type", 

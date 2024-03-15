@@ -5,8 +5,10 @@ import Button from '../components/Button';
 import {globalVariable} from '../globals';
 import { useNavigation } from '@react-navigation/native';
 
+const chatAPIkey = process.env.CHAT_API_KEY
+
 const ChatGPT = ({textFromImage}) => {
-    const apiKey = '###';
+    const apiKey = chatAPIkey;
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
     const navigation = useNavigation();
 

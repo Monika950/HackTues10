@@ -1,4 +1,4 @@
-import React from 'react';
+import React,  { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
@@ -6,9 +6,9 @@ import {globalVariable} from '../globals';
 import {Link} from 'expo-router';
 
 const ChatGPT = ({textFromImage}) => {
-    const apiKey = '###';
+    const apiKey = '###'
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
-
+    const [answerLocked, setAnswerLocked] = useState(true);
     const handleSend = async () => {
       console.log('aa');
       var questions;
@@ -41,6 +41,7 @@ const ChatGPT = ({textFromImage}) => {
           questions = response;
           globalVariable.GPTOutput = response.data.choices[0].message.content;
           console.log(globalVariable.GPTOutput);
+          setAnswerLocked(false)
       })
       .catch(error => {
           console.log(error);
@@ -51,10 +52,9 @@ const ChatGPT = ({textFromImage}) => {
 
   return (
     <View>
-      <Button text="Send" onPress={handleSend} />
-      <Link href={'/quizScreen'} asChild>
+      { answerLocked ? <Button text="Send" onPress={handleSend} /> : <Link href={'/quizScreen'} asChild>
         <Text>Start Quiz</Text>
-      </Link>
+      </Link> }
     </View>
   );
 };

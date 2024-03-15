@@ -25,7 +25,7 @@ const QuizComponent = () => {
     }
 
     const checkAnswer = (index: number) => {
-        if (answerLocked) return; // Prevent answering while animation is ongoing
+        if (answerLocked) return; 
         setPressedIndex(index);
         console.log(index);
         allPressed.push(index);
@@ -37,13 +37,13 @@ const QuizComponent = () => {
             setScore(score + 1);
             setTimeout(() => {
                 setQuestionIndex(questionIndex + 1);
-            }, 1000); // Delay before moving to the next question
+            }, 1000); 
         } else {
             setTimeout(() => {
                 setQuestionIndex(questionIndex + 1);
-            }, 1000); // Delay before moving to the next question
+            }, 1000); 
         }
-        setAnswerLocked(true); // Lock answering during animation
+        setAnswerLocked(true);
         setTimeout(() => {
             setColor(false);
             setAnswerLocked(false);
@@ -59,7 +59,7 @@ const QuizComponent = () => {
     };
 
     const renderQuiz = () => {
-        // Check if globalVariable.GPTOutput is defined
+
         if (GPTOutput() && GPTOutput().questions && GPTOutput().questions.length > 1){
             if (questionIndex < GPTOutput().questions.length) {
                 return (

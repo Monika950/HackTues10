@@ -8,7 +8,7 @@ import ChatGPT from '@/src/chat';
 export default function GetText() { 
 	const [image, setImage] = useState(null); 
 	
-	const [extractedText, setExtractedText] = useState(""); 
+	const [extractedText, setExtractedText] = useState("");
 
 	const pickImageGallery = async () => { 
 		let result = 
@@ -49,12 +49,13 @@ export default function GetText() {
 	// Function to perform OCR on an image 
 	// and extract text 
 	const performOCR = (file) => { 
+		var temp;
 		let myHeaders = new Headers(); 
 		myHeaders.append( 
 			"apikey", 
 			
 			// ADDD YOUR API KEY HERE 
-			"###"
+			"FEmvQr5uj99ZUvk3essuYb6P5lLLBS20"
 		); 
 		myHeaders.append( 
 			"Content-Type", 
@@ -78,9 +79,14 @@ export default function GetText() {
 			.then((result) => { 
 			
 				// Set the extracted text in state 
-				setExtractedText(result["all_text"]); 
+				temp = extractedText + result["all_text"];
+				//console.log(temp);
+				console.log('1');
+				setExtractedText(temp);
 			}) 
 			.catch((error) => console.log("error", error)); 
+
+			
 	}; 
 
 	return ( 

@@ -13,14 +13,7 @@ const ChatGPT = ({textFromImage}) => {
 
   const handleSend = async () => {
     // Extracted text from GetText component
-	try{
-		console.log('aa');
-		console.log(textFromImage);
-	} catch(e) {
-		console.log(e);
-	}
 	
-
     const response = await axios.post(apiUrl, {
       model: 'gpt-3.5-turbo',
       response_format: { "type": "json_object" },

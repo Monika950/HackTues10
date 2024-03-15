@@ -4,10 +4,12 @@ import { Text, View } from '@/components/Themed';
 
 import ChatGPT from '../../src/chat'
 
+import ImageToText from '@/components/ImageToText';
+
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-
+      <ImageToText/>
     </View>
   );
 }

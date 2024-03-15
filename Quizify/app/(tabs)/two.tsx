@@ -6,12 +6,11 @@ import QuizComponent from '@/components/Quiz';
 import React from 'react';
 import { globalVariable } from '@/globals';
 
-import ImageToText from '@/components/ImageToText';
 
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <ImageToText/>
+      
     </View>
   );
 }

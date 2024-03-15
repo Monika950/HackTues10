@@ -24,7 +24,7 @@ export default function GetText() {
 		if (!result.canceled) { 
 			performOCR(result.assets[0]); 
 
-			setImage(result.assets[0].uri); 
+			setImage(result.assets[0].uri);  // tuk se zapazva
 		} 
 	}; 
 
@@ -42,7 +42,7 @@ export default function GetText() {
 			// Perform OCR on the captured image 
 			// Set the captured image in state 
 			performOCR(result.assets[0]); 
-			setImage(result.assets[0].uri); 
+			setImage(result.assets[0].uri); //tuk se zapazva 
 		} 
 	}; 
 

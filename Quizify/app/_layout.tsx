@@ -2,6 +2,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
+import { Image, StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
@@ -53,6 +54,16 @@ function RootLayoutNav() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
+      <Image style={styles.image} source={require('../assets/images/curve.png')} />
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  image: {
+    width: '100%',
+    height: "100%",
+    position: 'absolute',
+    opacity: 0.7,
+  }
+});

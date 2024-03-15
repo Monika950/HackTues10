@@ -4,8 +4,8 @@ import { supabase } from '../../lib/supabase'
 import Auth from '../../components/Auth'
 import Account from '../../components/Account'
 import { Session } from '@supabase/supabase-js'
-
-import { StyleSheet, ScrollView } from 'react-native';
+// import { Image } from 'expo-image'
+import { StyleSheet, ScrollView, Image } from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
@@ -27,7 +27,6 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
       {session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
       </ScrollView>
     </View>
@@ -36,9 +35,13 @@ export default function TabOneScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // display: 'flex',
+    // // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    position: 'relative',
+    width: '100%',
+    height: '100%',
   },
   title: {
     fontSize: 30,
@@ -52,4 +55,9 @@ const styles = StyleSheet.create({
   scrollView: {
     marginHorizontal: 20,
   },
+  image: {
+    width: '100%',
+    height: "100%",
+    position: 'absolute',
+  }
 });

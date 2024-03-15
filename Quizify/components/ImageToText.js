@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, StyleSheet, Text, Image, SafeAreaView, } from "react-native";
+import { Button, StyleSheet, Text, Image, SafeAreaView, FlatList, } from "react-native";
 import { StatusBar } from "expo-status-bar"; 
 import { useState } from "react"; 
 import * as ImagePicker from "expo-image-picker";  
+import ChatGPT from '@/src/chat';
 
 export default function GetText() { 
 	const [image, setImage] = useState(null); 
@@ -53,7 +54,7 @@ export default function GetText() {
 			"apikey", 
 			
 			// ADDD YOUR API KEY HERE 
-			"FEmvQr5uj99ZUvk3essuYb6P5lLLBS20"
+			"###"
 		); 
 		myHeaders.append( 
 			"Content-Type", 
@@ -95,16 +96,6 @@ export default function GetText() {
 				title="Pick an image from camera"
 				onPress={pickImageCamera} 
 			/> 
-			{image && ( 
-				<Image 
-					source={{ uri: image }} 
-					style={{ 
-						width: 400, 
-						height: 300, 
-						objectFit: "contain", 
-					}} 
-				/> 
-			)} 
 
 			<Text style={styles.text1}> 
 				Extracted text: 
@@ -113,6 +104,7 @@ export default function GetText() {
 				{extractedText} 
 			</Text> 
 			<StatusBar style="auto" /> 
+			<ChatGPT textFromImage={extractedText}/>
 		</SafeAreaView> 
 	); 
 } 
@@ -121,30 +113,30 @@ const styles = StyleSheet.create({
 	container: { 
 		display: "flex", 
 		alignContent: "center", 
-		alignItems: "center", 
+		// alignItems: "center", 
 		justifyContent: "space-evenly", 
-		backgroundColor: "#fff", 
+		// backgroundColor: "#fff", 
 		height: "100%", 
 	}, 
 	heading: { 
-		fontSize: 28, 
-		fontWeight: "bold", 
-		marginBottom: 10, 
-		color: "green", 
-		textAlign: "center", 
+		// fontSize: 28, 
+		// fontWeight: "bold", 
+		// marginBottom: 10, 
+		// color: "green", 
+		// textAlign: "center", 
 	}, 
 	heading2: { 
-		fontSize: 22, 
-		fontWeight: "bold", 
-		marginBottom: 10, 
-		color: "black", 
-		textAlign: "center", 
+		// fontSize: 22, 
+		// fontWeight: "bold", 
+		// marginBottom: 10, 
+		// color: "black", 
+		// textAlign: "center", 
 	}, 
 	text1: { 
-		fontSize: 16, 
-		marginBottom: 10, 
-		color: "black", 
-		fontWeight: "bold", 
+		// fontSize: 16, 
+		// marginBottom: 10, 
+		// color: "black", 
+		// fontWeight: "bold", 
 	}, 
 });
 

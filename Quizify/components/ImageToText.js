@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, Image, SafeAreaView, FlatList, } from "react-native";
+import { StyleSheet, Text, Image, SafeAreaView, FlatList, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar"; 
 import { useState } from "react"; 
 import * as ImagePicker from "expo-image-picker";  
 import ChatGPT from '@/src/chat';
-import Button from '../components/Button';
 
 
 export default function GetText() { 
@@ -83,19 +82,19 @@ export default function GetText() {
 			.catch((error) => console.log("error", error)); 		
 	}; 
 
+	 
+
 	return ( 
 		<SafeAreaView style={styles.container}> 
 			<Text style={styles.heading2}> 
-				Image to Text App 
+				Quizify 
 			</Text> 
-			<Button 
-				text="Pick an image from gallery"
-				onPress={pickImageGallery}
-			/> 
-			<Button 
-				text="Pick an image from camera"
-				onPress={pickImageCamera} 
-			/> 
+			<TouchableOpacity onPress={pickImageGallery} style={styles.button}>
+        		<Text style={{ color: '#fff' }}>Pick an image from gallery</Text>
+      		</TouchableOpacity>
+			<TouchableOpacity onPress={pickImageCamera} style={styles.button}>
+        		<Text style={{ color: '#fff' }}>Take a photo</Text>
+      		</TouchableOpacity>
 			<StatusBar style="auto" /> 
 			<ChatGPT textFromImage={extractedText}/>
 		</SafeAreaView> 
@@ -107,26 +106,41 @@ const styles = StyleSheet.create({
 		display: "flex 1", 
 		alignContent: "center",  
 		justifyContent: "space-evenly", 
-		backgroundColor: "#fff", 
+		backgroundColor: "#fdf1bc", 
 		height: "100%", 
 	}, 
-	heading: { 
-		fontSize: 16, 
-		fontWeight: "bold", 
-		marginBottom: 8, 
-		color: "green", 
-		textAlign: "center", 
-	}, 
 	heading2: { 
-		fontSize: 16,  
+		fontSize: 24,  
 		marginBottom: 8, 
-		color: "black", 
+		color: "#ff6262", 
 		textAlign: "center", 
+		fontWeight: 'bold',
+		marginBottom: 55
+	},
+	heading2: { 
+		fontSize: 24,  
+		marginBottom: 8, 
+		color: "#ff6262", 
+		textAlign: "center", 
+		fontWeight: 'bold',
+		marginBottom: 55
 	}, 
 	text1: { 
 		fontSize: 16, 
 		marginBottom: 10, 
 		color: "black", 
-	}, 
+	},
+	button: {
+		marginTop: -65,
+		marginVertical: -10,
+		marginHorizontal: 100,
+		alignItems: 'center',
+		backgroundColor: '#ff6262',
+		padding: 15,
+		borderRadius: 1000,
+		width: 300
+	}
 });
+
+
 

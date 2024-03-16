@@ -6,6 +6,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link } from 'expo-router';
 import { globalVariable2 } from '../folderIndex';
 
+import { AntDesign } from '@expo/vector-icons';
+
 // Custom component for the folder
 const FolderComponent = ({ name1, onPress }) => {
   var temp = name1;
@@ -35,12 +37,17 @@ export default function TabTwoScreen() {
 
   return (
     <View style={styles.container}>
+      <Link href="/main2" style={styles.backButton}>
+        {/* <Text style={styles.backButtonText}>Back to Index</Text> */}
+        <AntDesign name="back" size={28} color="#696969" />
+      </Link>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         {/* Render five folder components */}
         <FolderComponent name1="16th March5" onPress={() => handleFolderPress('Folder 5')} />
         <FolderComponent name1="15th March1" onPress={() => handleFolderPress('Folder 1')} />
         <FolderComponent name1="14th March2" onPress={() => handleFolderPress('Folder 2')} />
       </ScrollView>
+  
       <Image style={styles.curve} source={require('../../assets/images/curve.png')} />
     </View>
   );
@@ -84,5 +91,17 @@ const styles = StyleSheet.create({
   folderName: {
     fontSize: 20, // Increase font size
     color: '#0f0f0f'
+  },
+  backButton: {
+    alignSelf: 'center',
+    marginVertical: 20,
+    paddingTop:30,
+    //position:'absolute',
+    // top: 20,
+		// right: 20,
+  },
+  backButtonText: {
+    color: '#007BFF',
+    fontSize: 16,
   },
 });

@@ -5,6 +5,8 @@ import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";  
 import ChatGPT from '@/src/chat';
 import Button from '../components/Button';
+import {Link} from 'expo-router'
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 export default function GetText() { 
@@ -85,6 +87,9 @@ export default function GetText() {
 
 	return ( 
 		<SafeAreaView style={styles.container}> 
+		<Link href={"/(tabs)/two"} style={styles.storage}>
+		<MaterialIcons name="storage" size={28} color="#696969" />
+		</Link>
 			<Text style={styles.heading2}> 
 				Quizify 
 			</Text> 
@@ -137,5 +142,12 @@ const styles = StyleSheet.create({
 		padding: 15,
 		borderRadius: 1000,
 		width: 300
+	},
+	storage:
+	{
+		position: 'absolute',
+		top: 20,
+		right: 20,
+		paddingTop:30,
 	}
 });

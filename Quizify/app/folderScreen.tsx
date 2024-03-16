@@ -1,7 +1,12 @@
-import { View, StyleSheet, FlatList, Image } from 'react-native';
+import { View, StyleSheet, FlatList, Image,Text } from 'react-native';
 import React from 'react';
 import images from '../assets/folderImages/folder';
 import { globalVariable2 } from './folderIndex';
+import { Link } from 'expo-router';
+import {  TouchableOpacity,  ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { AntDesign } from '@expo/vector-icons';
 
 const FolderScreen = () => {
 
@@ -9,7 +14,12 @@ const FolderScreen = () => {
   console.log(folderIndex);
   const filteredImages = images.filter(image => image.folder === folderIndex);
   return (
+    
     <View style={styles.body}>
+       <Link href="/two" style={styles.backButton}>
+        {/* <Text style={styles.backButtonText}>Back to Index</Text> */}
+        <AntDesign name="back" size={28} color="black" />
+      </Link>
     <View style={styles.container}>
       <FlatList
         data={filteredImages}
@@ -54,6 +64,15 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: '#dcdcdc',
+  },
+  backButton: {
+    alignSelf: 'center',
+    marginVertical: 20,
+    paddingTop:30,
+  },
+  backButtonText: {
+    color: '#007BFF',
+    fontSize: 16,
   },
 });
 

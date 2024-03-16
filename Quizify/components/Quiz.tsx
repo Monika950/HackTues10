@@ -59,7 +59,7 @@ const QuizComponent = () => {
     };
 
     const renderQuiz = () => {
-
+        
         if (GPTOutput() && GPTOutput().questions && GPTOutput().questions.length > 1){
             if (questionIndex < GPTOutput().questions.length) {
                 return (

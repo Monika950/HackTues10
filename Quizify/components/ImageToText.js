@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { StyleSheet, Text, Image, SafeAreaView, FlatList, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, Image, SafeAreaView, FlatList, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar"; 
 import { useState } from "react"; 
 import * as ImagePicker from "expo-image-picker";  
@@ -85,8 +86,6 @@ export default function GetText() {
 			.catch((error) => console.log("error", error)); 		
 	}; 
 
-	 
-
 	return ( 
 		<SafeAreaView style={styles.container}> 
 		<Link href={"/(tabs)/two"} style={styles.storage}>
@@ -95,57 +94,50 @@ export default function GetText() {
 			<Text style={styles.heading2}> 
 				Quizify 
 			</Text> 
-			 <Image
-                source={{ uri: 'https://media.discordapp.net/attachments/1201588977401077911/1218181860970987590/up1.png?ex=6606bb44&is=65f44644&hm=a16c029526e325534dce016f9368d1fa667dc817799a1b0539477f06ffeae0fa&=&format=webp&quality=lossless&width=713&height=619' }} // Replace with your image URL
-                style={styles.image}
-            />
-			<View style={styles.buttonContainer}>
-    			<TouchableOpacity onPress={pickImageGallery} style={styles.button}>
-        			<Text style={{ color: '#fff' }}>Pick an image from gallery</Text>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={pickImageCamera} style={styles.button}>
-					<Text style={{ color: '#fff' }}>Take a photo</Text>
-				</TouchableOpacity>
-			</View>
-
+			<TouchableOpacity onPress={pickImageGallery} style={styles.button}>
+        		<Text style={{ color: '#fff' }}>Pick an image from gallery</Text>
+      		</TouchableOpacity>
+			<TouchableOpacity onPress={pickImageCamera} style={styles.button}>
+        		<Text style={{ color: '#fff' }}>Take a photo</Text>
+      		</TouchableOpacity> 
 			<StatusBar style="auto" /> 
-			<View style={{justifyContent: 'center', alignItems: 'center', marginTop: 50}}>
-				<ChatGPT textFromImage={extractedText}/>
-			</View>
+			<ChatGPT textFromImage={extractedText}/>
 		</SafeAreaView> 
 	); 
 } 
 
 const styles = StyleSheet.create({ 
 	container: { 
-		flex: 1, 
+		display: "flex 1", 
 		alignContent: "center",  
-		justifyContent: "center", 
+		justifyContent: "space-evenly", 
 		backgroundColor: "#fdf1bc", 
-		//paddingTop: 50,
+		height: "100%", 
+	}, 
+	heading: { 
+		fontSize: 16, 
+		fontWeight: "bold", 
+		marginBottom: 8, 
+		color: "green", 
+		textAlign: "center", 
 	}, 
 	heading2: { 
-		fontSize: 35,  
-		marginBottom: 4, 
+		fontSize: 24,  
+		marginBottom: 8, 
 		color: "#ff6262", 
 		textAlign: "center", 
 		fontWeight: 'bold',
-		marginBottom: 55,
-	},
+		marginBottom: 55
+	}, 
 	text1: { 
 		fontSize: 16, 
 		marginBottom: 10, 
 		color: "black", 
 	},
-	buttonContainer: {
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
 	button: {
-		// marginTop: -65,
-		// marginVertical: -10,
-		// marginHorizontal: 30,
-		marginVertical: 10,
+		marginTop: -65,
+		marginVertical: -10,
+		marginHorizontal: 30,
 		alignItems: 'center',
 		backgroundColor: '#ff6262',
 		padding: 15,
@@ -158,16 +150,5 @@ const styles = StyleSheet.create({
 		top: 20,
 		right: 20,
 		paddingTop:30,
-	},
-	// 	width: '80%', // Adjust width here
-	// 	maxWidth: 300, // Add maxWidth for responsiveness
-	// },
-	image: {
-        position: 'absolute',
-        top: -50,
-        left: 30,
-        width: 200, // Adjust width as needed
-        height: 200, // Adjust height as needed
-        resizeMode: 'contain', // or 'contain' or 'stretch' as per your requirement
-    },
+	}
 });

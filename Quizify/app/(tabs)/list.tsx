@@ -10,58 +10,67 @@ import { FileObject } from '@supabase/storage-js'
 
 import ImageItem from '../../components/ImageItem'
 
+
 const list = () => {
-  const { user } = useAuth()
-  const [files, setFiles] = useState<FileObject[]>([])
+  const { user } = useAuth();
+  const [files, setFiles] = useState<FileObject[]>([]);
 
   useEffect(() => {
-    if (!user) return
+    if (!user) return;
 
     // Load user images
-    loadImages()
-  }, [user])
+    loadImages();
+  }, [user]);
 
   const loadImages = async () => {
-    const { data } = await supabase.storage.from('files').list(user!.id)
+    const { data } = await supabase.storage.from('files').list(user!.id);
     if (data) {
-      setFiles(data)
+      setFiles(data);
     }
-  }
+  };
 
   const onSelectImage = async () => {
-    // TODO
-    console.log('fffff');
-  }
+    const options: ImagePicker.ImagePickerOptions = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+    };
+
+    const result = await ImagePicker.launchImageLibraryAsync(options);
+
+    // Save image if not cancelled
+    if (!result.canceled) {
+      const img = result.assets[0];
+      const base64 = await FileSystem.readAsStringAsync(img.uri, { encoding: 'base64' });
+      //console.log(base64);
+      const filePath = `${user!.id}/${new Date().getTime()}.${img.type === 'image' ? 'png' : 'mp4'}`;
+      const contentType = img.type === 'image' ? 'image/png' : 'video/mp4';
+      await supabase.storage.from('files').upload(filePath, decode(base64), { contentType });
+      await loadImages();//?
+    }
+  };
 
   const onRemoveImage = async (item: FileObject, listIndex: number) => {
-    supabase.storage.from('files').remove([`${user!.id}/${item.name}`])
-    const newFiles = [...files]
-    newFiles.splice(listIndex, 1)
-    setFiles(newFiles)
-  }
-  
+    supabase.storage.from('files').remove([`${user!.id}/${item.name}`]);
+    const newFiles = [...files];
+    newFiles.splice(listIndex, 1);
+    setFiles(newFiles);
+  };
 
   return (
     <View style={styles.container}>
       <ScrollView>
         {files.map((item, index) => (
-          <ImageItem
-            key={item.id}
-            item={item}
-            userId={user!.id}
-            onRemoveImage={() => onRemoveImage(item, index)}
-          />
+          <ImageItem key={item.id} item={item} userId={user!.id} onRemoveImage={() => onRemoveImage(item, index)} />
         ))}
       </ScrollView>
-  
+
       {/* FAB to add images */}
       <TouchableOpacity onPress={onSelectImage} style={styles.fab}>
         <Ionicons name="camera-outline" size={30} color={'#fff'} />
       </TouchableOpacity>
     </View>
-  )
-  
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +90,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#2b825b',
     borderRadius: 100,
   },
-})
+});
 
-export default list
+export default list;

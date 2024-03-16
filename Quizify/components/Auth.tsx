@@ -9,7 +9,9 @@ type AuthProps = {
   signOut?: () => void
 }
 
-export const AuthContext = createContext<Partial<AuthProps>>({})
+export const AuthContext = createContext<Partial<AuthProps>>({
+  session: null,
+});
 
 // Custom hook to read the context values
 export function useAuth() {

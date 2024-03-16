@@ -9,6 +9,7 @@ const FolderScreen = () => {
   console.log(folderIndex);
   const filteredImages = images.filter(image => image.folder === folderIndex);
   return (
+    <View style={styles.body}>
     <View style={styles.container}>
       <FlatList
         data={filteredImages}
@@ -24,6 +25,7 @@ const FolderScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.flatListContent}
       />
+    </View>
     </View>
   );
 };
@@ -48,6 +50,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
+  },
+  body: {
+    flex: 1,
+    backgroundColor: '#dcdcdc',
   },
 });
 

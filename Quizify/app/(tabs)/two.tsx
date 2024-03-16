@@ -33,22 +33,36 @@ export default function TabTwoScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {/* Render five folder components */}
-      <FolderComponent name1="16th March5" onPress={() => handleFolderPress('Folder 5')} />
-      <FolderComponent name1="15th March1" onPress={() => handleFolderPress('Folder 1')} />
-      <FolderComponent name1="14th March2" onPress={() => handleFolderPress('Folder 2')} />
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        {/* Render five folder components */}
+        <FolderComponent name1="16th March5" onPress={() => handleFolderPress('Folder 5')} />
+        <FolderComponent name1="15th March1" onPress={() => handleFolderPress('Folder 1')} />
+        <FolderComponent name1="14th March2" onPress={() => handleFolderPress('Folder 2')} />
+      </ScrollView>
+      <Image style={styles.curve} source={require('../../assets/images/curve.png')} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#f6f6f6',
+  },
+  scrollViewContainer: {
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingHorizontal: 10,
     paddingTop: 20,
+  },
+  curve: {
+    position: 'absolute',
+    bottom: -330,
+    left: 0,
+    right: 0,
+    zIndex: -1,
   },
   folderContainer: {
     flexDirection: 'row',
@@ -59,6 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10, // Increase margin bottom
     width: '100%',
+    backgroundColor: '#f6f6f6'
   },
   folderIcon: {
     width: 40, // Increase icon size

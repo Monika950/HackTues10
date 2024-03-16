@@ -86,7 +86,7 @@ export default function GetText() {
 	return ( 
 		<SafeAreaView style={styles.container}> 
 			<Text style={styles.heading2}> 
-				Image to Text App 
+				Quizify 
 			</Text> 
 			<TouchableOpacity onPress={pickImageGallery} style={styles.button}>
         		<Text style={{ color: '#fff' }}>Pick an image from gallery</Text>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
 	button: {
 		marginTop: -65,
 		marginVertical: -10,
-		marginHorizontal: 100,
+		marginHorizontal: 30,
 		alignItems: 'center',
 		backgroundColor: '#ff6262',
 		padding: 15,

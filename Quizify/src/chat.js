@@ -1,5 +1,5 @@
 import React,  { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
 import {globalVariable} from '../globals';
@@ -53,7 +53,9 @@ const ChatGPT = ({textFromImage}) => {
   return (
     <View>
       { answerLocked ? <Button text="Send" onPress={handleSend} /> : <Link href={'/quizScreen'} asChild>
-        <Text>Start Quiz</Text>
+        <Pressable style={styles.container}>
+        <Text style={styles.text}>Start Quiz</Text>
+        </Pressable>
       </Link> }
     </View>
   );
@@ -65,7 +67,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-  }
+  },
+  container: {
+		marginTop: 40,
+		marginVertical: -10,
+		marginHorizontal: 30,
+		alignItems: 'center',
+		backgroundColor: '#ff6262',
+		padding: 15,
+		borderRadius: 1000,
+		width: 300
+	},
+  text: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: 'white',
+  },
 });
 
 export default ChatGPT;
+

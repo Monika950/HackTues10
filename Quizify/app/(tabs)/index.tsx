@@ -2,6 +2,9 @@ import 'react-native-url-polyfill/auto'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 
+import Account from '../../components/Account'
+import { Session } from '@supabase/supabase-js'
+
 //import EditScreenInfo from '@/components/EditScreenInfo';
 import { Alert, View, Button, TextInput, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
@@ -45,7 +48,7 @@ const Login = () => {
       <Image style={styles.curve} source={require('../../assets/images/curve.png')} />
       <Image style={styles.down1} source={require('../../assets/images/down1.png')} />
       <Image style={styles.up1} source={require('../../assets/images/up1.png')} />
-      <Text style={styles.header}>Login</Text>
+      <Text style={styles.header}>Welcome</Text>
 
       <TextInput
         autoCapitalize="none"
@@ -65,7 +68,9 @@ const Login = () => {
       <TouchableOpacity onPress={onSignInPress} style={styles.button}>
         <Text style={{ color: '#fff' }}>Sign in</Text>
       </TouchableOpacity>
-      <Button onPress={onSignUpPress} title="Create Account" color={'#fff'}></Button>
+      <TouchableOpacity onPress={onSignUpPress} style={styles.button}>
+        <Text style={{ color: '#fff' }}>Create Account</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
   down1: {
     width: 130,
     height: 130,
-    bottom: 0,
+    bottom: -10,
     right: 0,
     position: 'absolute',
     opacity: 1,
@@ -96,36 +101,38 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 200,
-    //padding: 20,
-    backgroundColor: '#151515',
+    paddingTop: 190,
+    backgroundColor: '#fff',
   },
   header: {
     fontSize: 30,
+    fontWeight: 'bold',
     textAlign: 'center',
     margin: 50,
-    color: '#fff',
+    color: '#ff6262',
   },
   inputField: {
     marginVertical: 4,
+    marginHorizontal: 20,
     height: 50,
     borderWidth: 1,
-    borderColor: '#2b825b',
-    borderRadius: 4,
+    borderColor: '#ff6262',
+    borderRadius: 10,
     padding: 10,
-    color: '#fff',
-    backgroundColor: '#363636',
+    color: '#696969',
+    backgroundColor: '#fff'
   },
   button: {
-    marginVertical: 15,
+    marginTop: 20,
+    marginVertical: -10,
+    marginHorizontal: 100,
     alignItems: 'center',
-    backgroundColor: '#2b825b',
-    padding: 12,
-    borderRadius: 4,
+    backgroundColor: '#ff6262',
+    padding: 15,
+    borderRadius: 1000,
   },
 })
 
 
 
 export default Login
-

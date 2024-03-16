@@ -1,7 +1,7 @@
 import { Slot, useRouter, useSegments } from 'expo-router'
 import { useEffect } from 'react'
 import {AuthProvider, useAuth} from '../components/Auth'
-//import { InitialLayout } from './Initial'
+
 
 // Makes sure the user is authenticated before accessing protected pages
 const InitialLayout = () => {

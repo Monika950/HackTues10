@@ -110,8 +110,8 @@ const QuizComponent = () => {
             } else {
                 return (
                     <View>
-                        <Text>Quiz Over</Text>
-                        <Text>Your Score: {score}</Text>
+                        <Text style={styles.score}>Quiz Over</Text>
+                        <Text style={styles.score}>Your Score: {score}</Text>
                         <Button onPress={handlePress} text='Go Back' />
                     </View>
                 );
@@ -134,9 +134,15 @@ const QuizComponent = () => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: 'lightblue',
+        backgroundColor: '#fc7474',
         padding: 15,
-        alignItems: 'center',
+        textAlign: "center",
+        borderRadius: 100,
+        marginVertical: 10,
+    },
+    score: {
+        padding: 0,
+        textAlign: "center",
         borderRadius: 100,
         marginVertical: 10,
     },

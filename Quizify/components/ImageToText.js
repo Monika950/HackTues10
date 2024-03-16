@@ -4,7 +4,6 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react"; 
 import * as ImagePicker from "expo-image-picker";  
 import ChatGPT from '@/src/chat';
-import Button from '../components/Button';
 
 
 export default function GetText() { 
@@ -83,17 +82,19 @@ export default function GetText() {
 			.catch((error) => console.log("error", error)); 		
 	}; 
 
+	 
+
 	return ( 
 		<SafeAreaView style={styles.container}> 
 			<Text style={styles.heading2}> 
-				Image to Text App 
+				Quizify 
 			</Text> 
 			<TouchableOpacity onPress={pickImageGallery} style={styles.button}>
         		<Text style={{ color: '#fff' }}>Pick an image from gallery</Text>
       		</TouchableOpacity>
 			<TouchableOpacity onPress={pickImageCamera} style={styles.button}>
         		<Text style={{ color: '#fff' }}>Take a photo</Text>
-      		</TouchableOpacity> 
+      		</TouchableOpacity>
 			<StatusBar style="auto" /> 
 			<ChatGPT textFromImage={extractedText}/>
 		</SafeAreaView> 
@@ -108,13 +109,14 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fdf1bc", 
 		height: "100%", 
 	}, 
-	heading: { 
-		fontSize: 16, 
-		fontWeight: "bold", 
+	heading2: { 
+		fontSize: 24,  
 		marginBottom: 8, 
-		color: "green", 
+		color: "#ff6262", 
 		textAlign: "center", 
-	}, 
+		fontWeight: 'bold',
+		marginBottom: 55
+	},
 	heading2: { 
 		fontSize: 24,  
 		marginBottom: 8, 
@@ -139,4 +141,6 @@ const styles = StyleSheet.create({
 		width: 300
 	}
 });
+
+
 
